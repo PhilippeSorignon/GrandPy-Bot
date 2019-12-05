@@ -1,4 +1,5 @@
 from flask import Flask, url_for
 
 def test_app(client):
-    assert client.get(url_for('home')).status_code == 200
+    '''Test if the main page loads correctly'''
+    assert client.get(url_for('views.home')).status_code == 200
