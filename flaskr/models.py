@@ -1,4 +1,5 @@
 import json
+import requests
 import re
 
 
@@ -23,3 +24,12 @@ def parse_adress(user_input):
         phrase = phrase[:len(phrase) - 1]
 
     return phrase
+
+
+def find_full_adress(user_adress):
+    request_data = {'query':user_adress, 'key':'AIzaSyBHrENd4QEAxzW81J1vyRNPvYzvVrbQaig'}
+
+    r = requests.get('https://maps.googleapis.com/maps/api/place/textsearch/json?',\
+     params=request_data).json()['results']
+
+    return r[0]['formatted_address']
