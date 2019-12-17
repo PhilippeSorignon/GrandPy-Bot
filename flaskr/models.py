@@ -1,6 +1,7 @@
 import json
 import requests
 import re
+from .settings import API_KEY
 
 
 def parse_adress(user_input):
@@ -15,7 +16,7 @@ def parse_adress(user_input):
             if word in stop_words:
                 phrase = ""
             else:
-                phrase += word + " "
+                phrase += word + "%20"
 
             word = ""
     phrase += re.sub('[ !?.]', '', word)
@@ -27,7 +28,7 @@ def parse_adress(user_input):
 
 
 def find_full_adress(user_adress):
-    request_data = {'query':user_adress, 'key':'AIzaSyBHrENd4QEAxzW81J1vyRNPvYzvVrbQaig'}
+    request_data = {'query':user_adress, 'key':API_KEY}
 
     r = requests.get('https://maps.googleapis.com/maps/api/place/textsearch/json?',\
      params=request_data).json()['results']

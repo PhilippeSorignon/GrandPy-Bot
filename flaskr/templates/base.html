@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bitter:400,700">
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/loader.css')}}">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
           <div class="col">
               <h2>Posez votre question</h2>
               <hr />
-              <form><textarea class="form-control"></textarea></form>
+              <form><textarea class="form-control" name="user_data"></textarea></form>
           </div>
       </div>
     </div>
@@ -35,6 +36,31 @@
     </footer>
     <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
     <script src="{{url_for('static', filename='bootstrap/js/bootstrap.min.js')}}"></script>
+
+    <script type="text/javascript">
+    $(document).on('keypress',function(e) {
+      if(e.which == 13) {
+
+       $.ajax({
+            url: '/api',
+            data: $('form').serialize(),
+            type: 'POST',
+            success: function(response) {
+               $('#form').load("{{url_for('static', filename='html/loader.html')}}");
+               setTimeout(function (){
+
+                  $('#form').load("/map/"+response);
+
+                }, 2000);
+
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+      }
+      });
+    </script>
 </body>
 
 </html>

@@ -7,6 +7,6 @@ def test_parse_view():
     assert parse_adress("Bonjour, je cherche où se trouve la Tour Eiffel.") == "Tour Eiffel"
 
 
-def test_return_full_adress():
-    '''Test if the call to the google place API return what we expect'''
-    assert find_full_adress("OpenClassrooms") == "7 Cité Paradis, 75010 Paris, France"
+'''def test_return_full_adress():
+    \'''Test if the call to the google place API return what we expect\'''
+    assert find_full_adress("OpenClassrooms") == "7 Cité Paradis, 75010 Paris, France"'''

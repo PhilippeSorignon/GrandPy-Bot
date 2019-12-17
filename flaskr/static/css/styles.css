@@ -17,6 +17,12 @@ header span {
 
 #form {
   padding:15px;
+  text-align: center;
+}
+
+#loader {
+  padding: 15px;
+  text-align:center;
 }
 
 footer {
@@ -31,4 +37,3 @@ footer {
 #logo {
   margin-left:15px;
 }
-
