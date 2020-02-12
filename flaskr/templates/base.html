@@ -46,10 +46,11 @@
             data: $('form').serialize(),
             type: 'POST',
             success: function(response) {
+              console.log(response);
                $('#form').load("{{url_for('static', filename='html/loader.html')}}");
                setTimeout(function (){
 
-                  $('#form').load("/map/"+response);
+                  $('#form').load("/map?adress="+response['adress']+"&wiki="+response['wiki']);
 
                 }, 2000);
 
