@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-import json
+import json, re
 from .models import parse_adress, find_full_adress, get_wikipedia
 from .settings import API_KEY
 
@@ -23,6 +23,7 @@ def api():
     user_request = request.form['user_data']
     user_request = parse_adress(user_request)
     full_adress = user_request #find_full_adress(user_request)
+    user_request = re.sub('[%20]', ' ', user_request)
     wikipedia = get_wikipedia(user_request)
     r = {}
     r['adress'] = full_adress
