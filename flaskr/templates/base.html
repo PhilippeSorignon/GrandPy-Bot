@@ -50,7 +50,7 @@
                $('#form').load("{{url_for('static', filename='html/loader.html')}}");
                setTimeout(function (){
 
-                  $('#form').load("/map?adress="+response['adress']+"&wiki="+response['wiki']);
+                  $('#form').load("/map");
 
                 }, 2000);
 
