@@ -17,6 +17,7 @@ def home():
 @views.route('/map')
 def map():
     data = {}
+    data['name'] = api_instance.user_request
     data['adress'] = api_instance.full_adress
     data['wiki'] = api_instance.wikipedia_description
     return render_template("maps.html", data=data, api_key=API_KEY)
