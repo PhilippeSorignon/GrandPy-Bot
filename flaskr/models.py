@@ -32,19 +32,18 @@ class Api:
             self.user_request = self.user_request[:len(self.user_request) - 1]
 
 
-    '''Return the exact adress using the Google Places API'''
-    def find_full_adress(self, user_adress):
-        request_data = {'query':user_adress, 'key':API_KEY}
+    '''Return the exact adress using Nominatim'''
+    def find_full_adress(self):
+        request_data = {'q':self.user_request, 'format':'json', 'limit':'1'}
 
-        r = requests.get('https://maps.googleapis.com/maps/api/place/textsearch/json?',\
-         params=request_data).json()['results']
+        r = requests.get('https://nominatim.openstreetmap.org/search?',\
+         params=request_data).json()
 
-        self.full_adress = r[0]['formatted_address']
+        self.full_adress = r[0]['display_name']
 
 
     '''Return the Wikipedia introduction'''
     def get_wikipedia(self):
-        # format=json&action=query&prop=extracts&exintro&explaintext&redirects=1&titles=Paris
         request_data = {'format':'json', 'action':'query', 'prop':'extracts',
                         'exintro':'', 'explaintext':'', 'redirects':'1', 'titles':self.user_request}
 

@@ -25,8 +25,6 @@ def map():
 @views.route('/api', methods=['POST'])
 def api():
     api_instance.parse_adress(request.form['user_data'])
-    #full_adress = user_request #find_full_adress(user_request)
-    api_instance.full_adress = api_instance.user_request
-    #user_request = re.sub('[%20]', ' ', user_request)
+    api_instance.find_full_adress()
     api_instance.get_wikipedia()
     return 'ok'
