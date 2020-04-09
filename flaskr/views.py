@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request
 import json, re
 from .models import Api
-from .settings import API_KEY
+import os
 
 global user_place
 
@@ -20,7 +20,7 @@ def map():
     data['name'] = api_instance.user_request
     data['adress'] = api_instance.full_adress
     data['wiki'] = api_instance.wikipedia_description
-    return render_template("maps.html", data=data, api_key=API_KEY)
+    return render_template("maps.html", data=data, api_key=os.environ['API_KEY'])
 
 
 @views.route('/api', methods=['POST'])
