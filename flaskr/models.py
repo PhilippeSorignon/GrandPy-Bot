@@ -1,7 +1,6 @@
 import json
 import requests
 import re
-from .settings import API_KEY
 
 '''Make the APIs calls and return formatted data'''
 class Api:
