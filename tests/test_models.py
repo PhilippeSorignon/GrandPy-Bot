@@ -1,10 +1,14 @@
-from flaskr.models import parse_adress, find_full_adress
+from flaskr.models import Api
 
-def test_parse_view():
-    '''Test if the parse_view function return what we want'''
-    assert parse_adress("Salut GrandPy ! Est-ce que tu connais l'adresse d'OpenClassrooms ?") == "OpenClassrooms%20"
+class TestView:
+    test = Api()
+    def test_parse_view(self):
+        '''Test if the parse_view function return what we want'''
+        self.test.parse_adress("Salut GrandPy ! Est-ce que tu connais l'adresse d'OpenClassrooms ?")
+        assert self.test.user_request == "OpenClassrooms"
 
-    assert parse_adress("Bonjour, je cherche où se trouve la Tour Eiffel.") == "Tour%20Eiffel"
+        self.test.parse_adress("Bonjour, je cherche où se trouve la Tour Eiffel.")
+        assert self.test.user_request == "Tour Eiffel"
 
 
 '''def test_return_full_adress():

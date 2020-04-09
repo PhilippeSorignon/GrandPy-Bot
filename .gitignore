@@ -3,3 +3,4 @@ __pycache__/
 flaskr/__pycache__/
 tests/__pycache__/
 flaskr/settings.py
+geckodriver.log
