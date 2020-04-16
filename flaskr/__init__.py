@@ -22,3 +22,5 @@ def create_app(test_config=None):
         pass
 
     return app
+
+app = create_app()

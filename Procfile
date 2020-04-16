@@ -1,2 +1,2 @@
-web: gunicorn flaskr:create_app
+web: gunicorn flaskr:app
 init: FLASK_APP=flaskr
