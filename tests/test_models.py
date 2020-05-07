@@ -1,12 +1,10 @@
 import flaskr.models as models
 
-
-import urllib.request
-
 from io import BytesIO
 import json
 
 class TestView:
+    """Tests"""
     test = models.Api()
     def test_parse_view(self):
         '''Test if the parse_view function return what we want'''
@@ -17,12 +15,30 @@ class TestView:
         assert self.test.user_request == "Tour Eiffel"
 
     def test_nominatim(self, monkeypatch):
+        """Mock to test if the adress is correct"""
         self.test.parse_adress("Bonjour, je cherche où se trouve la Tour Eiffel.")
 
-        r = [{'place_id': 80582518, 'licence': 'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright', 'osm_type': 'way', 'osm_id': 5013364, 'boundingbox': ['48.8574753', '48.8590465', '2.2933084', '2.2956897'], 'lat': '48.858260200000004', 'lon': '2.2944990543196795', 'display_name': 'Tour Eiffel, 5, Avenue Anatole France, Quartier du Gros-Caillou, Paris, Île-de-France, France métropolitaine, 75007, France', 'class': 'tourism', 'type': 'attraction', 'importance': 0.7868325701744197, 'icon': 'https://nominatim.openstreetmap.org/images/mapicons/poi_point_of_interest.p.20.png'}]
+        r = [{
+            'place_id': 80582518,
+            'licence': 'Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright',
+            'osm_type': 'way',
+            'osm_id': 5013364,
+            'boundingbox': ['48.8574753', '48.8590465', '2.2933084', '2.2956897'],
+            'lat': '48.858260200000004',
+            'lon': '2.2944990543196795',
+            'display_name':
+            'Tour Eiffel, 5, Avenue Anatole France, Quartier du Gros-Caillou, Paris, Île-de-France, France métropolitaine, 75007, France',
+            'class': 'tourism',
+            'type': 'attraction',
+            'importance': 0.7868325701744197,
+            'icon':
+            'https://nominatim.openstreetmap.org/images/mapicons/poi_point_of_interest.p.20.png'
+            }]
 
         def mockreturn(request, params):
+            """Mock Definition"""
             class faker:
+                """Fake Return"""
                 @staticmethod
                 def json():
                     return r
@@ -42,7 +58,10 @@ class TestView:
 
 
         def mockreturn(request, params):
+            """Mock Definition"""
             class faker:
+                """Fake Return"""
+
                 @staticmethod
                 def json():
                     return r

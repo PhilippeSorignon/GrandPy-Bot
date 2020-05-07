@@ -1,7 +1,7 @@
+import os
 from flask import Blueprint, render_template, request
 import json, re
 from .models import Api
-import os
 
 global user_place
 

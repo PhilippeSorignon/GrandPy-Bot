@@ -4,8 +4,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 
-import time
-
 from flaskr import create_app
 
 class TestUser(LiveServerTestCase):
@@ -39,5 +37,5 @@ class TestUser(LiveServerTestCase):
         result = self.driver.find_element_by_id("text_result").text
         result_wiki = self.driver.find_element_by_id("text_wiki").text
 
-        assert "Bien sûr mon poussin ! La voici : Musée des Civilisations de l'Europe et de la Méditerranée, 1, Promenade Robert Laffont, La Joliette, Deuxième secteur, Marseille, Provence-Alpes-Côte d'Azur, France métropolitaine, 13002, France" in result
+        assert "Musée des Civilisations de l'Europe et de la Méditerranée, Promenade Robert Laffont" in result
         assert "Le musée des Civilisations de l'Europe et de la Méditerranée (Mucem) est un musée national situé à Marseille. Il a ouvert le 7 juin 2013, lorsque Marseille était la Capitale européenne de la culture" in result_wiki

@@ -2,16 +2,16 @@ import json
 import requests
 import re
 
-'''Make the APIs calls and return formatted data'''
 class Api:
-    '''Init constructor'''
+    '''Make the APIs calls and return formatted data'''
     def __init__(self):
+        '''Init constructor'''
         self.user_request = ''
         self.full_adress = ''
         self.wikipedia_description = ''
 
-    '''Return the place to search from the user input'''
     def parse_adress(self, user_input):
+        '''Return the place to search from the user input'''
         with open('flaskr/static/fr.txt') as json_file:
             stop_words = json.load(json_file)
         word = ""
@@ -31,8 +31,8 @@ class Api:
             self.user_request = self.user_request[:len(self.user_request) - 1]
 
 
-    '''Return the exact adress using Nominatim'''
     def find_full_adress(self):
+        '''Return the exact adress using Nominatim'''
         request_data = {'q':self.user_request, 'format':'json', 'limit':'1'}
 
         r = requests.get('https://nominatim.openstreetmap.org/search?',\
@@ -41,8 +41,8 @@ class Api:
         self.full_adress = r[0]['display_name']
 
 
-    '''Return the Wikipedia introduction'''
     def get_wikipedia(self):
+        '''Return the Wikipedia introduction'''
         request_data = {'format':'json', 'action':'query', 'prop':'extracts',
                         'exintro':'', 'explaintext':'', 'redirects':'1', 'titles':self.user_request}
 
