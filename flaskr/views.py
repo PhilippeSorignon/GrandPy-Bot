@@ -25,6 +25,7 @@ def map():
 
 @views.route('/api', methods=['POST'])
 def api():
+    api_instance.reset()
     api_instance.parse_adress(request.form['user_data'])
     api_instance.find_full_adress()
     api_instance.get_wikipedia()

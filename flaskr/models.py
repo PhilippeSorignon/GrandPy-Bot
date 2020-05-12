@@ -10,6 +10,12 @@ class Api:
         self.full_adress = ''
         self.wikipedia_description = ''
 
+    def reset(self):
+        '''Set all values to 0'''
+        self.user_request = ''
+        self.full_adress = ''
+        self.wikipedia_description = ''
+
     def parse_adress(self, user_input):
         '''Return the place to search from the user input'''
         with open('flaskr/static/fr.txt') as json_file:
@@ -30,6 +36,8 @@ class Api:
         if self.user_request[len(self.user_request) - 1] == ' ':
             self.user_request = self.user_request[:len(self.user_request) - 1]
 
+        self.user_request = self.user_request.title()
+
 
     def find_full_adress(self):
         '''Return the exact adress using Nominatim'''
@@ -37,8 +45,13 @@ class Api:
 
         r = requests.get('https://nominatim.openstreetmap.org/search?',\
          params=request_data).json()
+        if r:
+            self.full_adress = r[0]['display_name']
+        else:
+            self.full_adress = 'NotFound'
+            print('NotFound')
 
-        self.full_adress = r[0]['display_name']
+
 
 
     def get_wikipedia(self):
@@ -48,5 +61,12 @@ class Api:
 
         r = requests.get('https://fr.wikipedia.org/w/api.php?', params=request_data).json()['query']
 
-        self.wikipedia_description = re.sub('[\[\]]', '',
-                                            r['pages'][list(r['pages'].keys())[0]]['extract'])
+        print(r)
+
+        if list(r['pages'].keys())[0] == '-1':
+            print('AH MERDE ALORS')
+            self.wikipedia_description = "NotFound"
+
+        else:
+            self.wikipedia_description = re.sub('[\[\]]', '',
+                                                r['pages'][list(r['pages'].keys())[0]]['extract'])

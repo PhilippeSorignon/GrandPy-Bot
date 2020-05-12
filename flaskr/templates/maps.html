@@ -1,7 +1,17 @@
-<p id="text_result">Bien sûr mon poussin ! La voici : {{ data['adress'] }}</p>
+{% if data['adress'] != 'NotFound' %}
+  <p id="text_result">Bien sûr mon poussin ! La voici : {{ data['adress'] }}</p>
+  <iframe allowfullscreen="" frameborder="0" width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key={{ api_key }}&amp;q={{ data['name'] }}&amp;zoom=11"></iframe>
+{% else %}
+  <p id="text_result">Malheureusement, je ne connais pas cette adresse :(<br /></p>
+{% endif %}
 
-<iframe allowfullscreen="" frameborder="0" width="100%" height="400" src="https://www.google.com/maps/embed/v1/place?key={{ api_key }}&amp;q={{ data['name'] }}&amp;zoom=11"></iframe>
+
+
 
 <br />
 <br />
-<p id="text_wiki">{{ data['wiki'] }}</p>
+{% if data['adress'] != 'NotFound' %}
+  <p id="text_wiki">{{ data['wiki'] }}</p>
+{% else %}
+  <p id="text_wiki"><br />J'ai cherché pendant des jours, mais je n'ai trouvé aucun article Wikipedia pour ta demande :(</p>
+{% endif %}
