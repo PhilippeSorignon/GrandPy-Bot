@@ -60,8 +60,6 @@ class Api:
 
         r = requests.get('https://fr.wikipedia.org/w/api.php?', params=request_data).json()['query']
 
-        print(r)
-
         if list(r['pages'].keys())[0] == '-1':
             self.wikipedia_description = "NotFound"
 
