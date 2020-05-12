@@ -5,10 +5,6 @@ header {
   margin-bottom:10px;
 }
 
-header span {
-  color:#08c;
-}
-
 .container {
   background-color:#ecf2f5;
   border:1px solid #bcd;
@@ -36,4 +32,13 @@ footer {
 
 #logo {
   margin-left:15px;
+}
+
+#logo-white {
+  color: white;
+  text-decoration: none;
+}
+
+header span {
+  color:#08c;
 }
