@@ -7,8 +7,6 @@ global user_place
 
 views = Blueprint("views", __name__, static_folder="static", template_folder="templates")
 
-api_instance = Api()
-
 @views.route('/')
 def home():
     return render_template("base.html")
@@ -17,16 +15,20 @@ def home():
 @views.route('/map')
 def map():
     data = {}
-    data['name'] = api_instance.user_request
-    data['adress'] = api_instance.full_adress
-    data['wiki'] = api_instance.wikipedia_description
+    data['name'] = request.args.get('name')
+    data['adress'] = request.args.get('adress')
+    data['wiki'] = request.args.get('wiki')
     return render_template("maps.html", data=data, api_key=os.environ['API_KEY'])
 
 
 @views.route('/api', methods=['POST'])
 def api():
-    api_instance.reset()
+    api_instance = Api()
     api_instance.parse_adress(request.form['user_data'])
     api_instance.find_full_adress()
     api_instance.get_wikipedia()
-    return 'ok'
+    data = {}
+    data['name'] = api_instance.user_request
+    data['adress'] = api_instance.full_adress
+    data['wiki'] = api_instance.wikipedia_description
+    return data
