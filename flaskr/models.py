@@ -49,7 +49,6 @@ class Api:
             self.full_adress = r[0]['display_name']
         else:
             self.full_adress = 'NotFound'
-            print('NotFound')
 
 
 
@@ -64,7 +63,6 @@ class Api:
         print(r)
 
         if list(r['pages'].keys())[0] == '-1':
-            print('AH MERDE ALORS')
             self.wikipedia_description = "NotFound"
 
         else:
